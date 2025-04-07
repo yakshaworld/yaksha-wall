@@ -1,0 +1,37 @@
+
+body {
+  font-family: sans-serif;
+  background: #111;
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+.imagem img {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+}
+.imagem a {
+  display: block;
+  margin-top: 8px;
+  color: #00f0ff;
+  text-decoration: none;
+}
+#topo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  background: #00f0ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
