@@ -1,247 +1,322 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yaksha Wall</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YAKSHA WALLPAPERS</title>
+  <!-- Firebase versão compatível com sintaxe antiga -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin: 0;
+      color: #00bcd4;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .title-bar {
+      background-color: #1e1e1e;
+      padding: 20px 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .user-panel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-name {
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .footer-bar {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 40px 0;
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 60px;
+      width: 100%;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+    }
+
+    .card-content {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .download-btn, .like-btn {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 5px;
+      background-color: #00bcd4;
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .download-btn:hover, .like-btn:hover {
+      background-color: #008ba3;
+    }
+
+    #loginBtn {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    #loginBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 114, 255, 0.5);
+    }
+
+    #logoutBtn {
+      padding: 10px 20px;
+      background: #333;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    #logoutBtn:hover {
+      background: #555;
+      transform: scale(1.05);
+    }
+
+    #topBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      font-size: 16px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #00bcd4;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #topBtn:hover {
+      background-color: #008ba3;
+    }
+  </style>
 </head>
 <body>
-    <header class="cabecalho">
-        <h1>Yaksha Wall</h1>
-        <p class="subtitulo">Seja bem-vindo!</p>
-    </header>
 
-    <section>
-        <h2>Anime Ação</h2>
-        <div class="galeria">
-    
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_1.jpg" alt="acao_1.jpg">
-                <a href="imagens/anime-acao/acao_1.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_2.jpg" alt="acao_2.jpg">
-                <a href="imagens/anime-acao/acao_2.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_3.jpg" alt="acao_3.jpg">
-                <a href="imagens/anime-acao/acao_3.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_4.jpg" alt="acao_4.jpg">
-                <a href="imagens/anime-acao/acao_4.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_5.jpg" alt="acao_5.jpg">
-                <a href="imagens/anime-acao/acao_5.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_6.jpg" alt="acao_6.jpg">
-                <a href="imagens/anime-acao/acao_6.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_7.jpg" alt="acao_7.jpg">
-                <a href="imagens/anime-acao/acao_7.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_8.jpg" alt="acao_8.jpg">
-                <a href="imagens/anime-acao/acao_8.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_9.jpg" alt="acao_9.jpg">
-                <a href="imagens/anime-acao/acao_9.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-acao/acao_10.jpg" alt="acao_10.jpg">
-                <a href="imagens/anime-acao/acao_10.jpg" download>Baixe aqui</a>
-            </div>
-        
-        </div>
-    </section>
-    
-    <section>
-        <h2>Anime Fantasia</h2>
-        <div class="galeria">
-    
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_1.jpg" alt="fantasia_1.jpg">
-                <a href="imagens/anime-fantasia/fantasia_1.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_2.jpg" alt="fantasia_2.jpg">
-                <a href="imagens/anime-fantasia/fantasia_2.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_3.jpg" alt="fantasia_3.jpg">
-                <a href="imagens/anime-fantasia/fantasia_3.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_4.jpg" alt="fantasia_4.jpg">
-                <a href="imagens/anime-fantasia/fantasia_4.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_5.jpg" alt="fantasia_5.jpg">
-                <a href="imagens/anime-fantasia/fantasia_5.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_6.jpg" alt="fantasia_6.jpg">
-                <a href="imagens/anime-fantasia/fantasia_6.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_7.jpg" alt="fantasia_7.jpg">
-                <a href="imagens/anime-fantasia/fantasia_7.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_8.jpg" alt="fantasia_8.jpg">
-                <a href="imagens/anime-fantasia/fantasia_8.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_9.jpg" alt="fantasia_9.jpg">
-                <a href="imagens/anime-fantasia/fantasia_9.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-fantasia/fantasia_10.jpg" alt="fantasia_10.jpg">
-                <a href="imagens/anime-fantasia/fantasia_10.jpg" download>Baixe aqui</a>
-            </div>
-        
-        </div>
-    </section>
-    
-    <section>
-        <h2>Anime Romance</h2>
-        <div class="galeria">
-    
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_1.jpg" alt="romance_1.jpg">
-                <a href="imagens/anime-romance/romance_1.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_2.jpg" alt="romance_2.jpg">
-                <a href="imagens/anime-romance/romance_2.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_3.jpg" alt="romance_3.jpg">
-                <a href="imagens/anime-romance/romance_3.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_4.jpg" alt="romance_4.jpg">
-                <a href="imagens/anime-romance/romance_4.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_5.jpg" alt="romance_5.jpg">
-                <a href="imagens/anime-romance/romance_5.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_6.jpg" alt="romance_6.jpg">
-                <a href="imagens/anime-romance/romance_6.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_7.jpg" alt="romance_7.jpg">
-                <a href="imagens/anime-romance/romance_7.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_8.jpg" alt="romance_8.jpg">
-                <a href="imagens/anime-romance/romance_8.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_9.jpg" alt="romance_9.jpg">
-                <a href="imagens/anime-romance/romance_9.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/anime-romance/romance_10.jpg" alt="romance_10.jpg">
-                <a href="imagens/anime-romance/romance_10.jpg" download>Baixe aqui</a>
-            </div>
-        
-        </div>
-    </section>
-    
-    <section>
-        <h2>Manhwa Diversos</h2>
-        <div class="galeria">
-    
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_1.jpg" alt="manhwa_1.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_1.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_2.jpg" alt="manhwa_2.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_2.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_3.jpg" alt="manhwa_3.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_3.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_4.jpg" alt="manhwa_4.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_4.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_5.jpg" alt="manhwa_5.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_5.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_6.jpg" alt="manhwa_6.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_6.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_7.jpg" alt="manhwa_7.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_7.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_8.jpg" alt="manhwa_8.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_8.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_9.jpg" alt="manhwa_9.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_9.jpg" download>Baixe aqui</a>
-            </div>
-        
-            <div class="wallpaper">
-                <img src="imagens/manhwa-diversos/manhwa_10.jpg" alt="manhwa_10.jpg">
-                <a href="imagens/manhwa-diversos/manhwa_10.jpg" download>Baixe aqui</a>
-            </div>
-        
-        </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2025 Yaksha Wall. Todos os direitos reservados.</p>
-    </footer>
+  <div class="title-bar">
+    <h1>YAKSHA WALLPAPER'S</h1>
+    <div class="user-panel" id="userPanel">
+      <span class="user-name" id="userName"></span>
+      <img src="" alt="Avatar" class="user-avatar" id="userAvatar" style="display:none;">
+      <button id="loginBtn" onclick="signIn()">Entrar com Google</button>
+      <button id="logoutBtn" onclick="signOut()" style="display:none;">Sair</button>
+    </div>
+  </div>
+
+  <h2>WALLPAPER</h2>
+  <div class="gallery" id="gallery-wallpaper"></div>
+
+  <h2>ICONS</h2>
+  <div class="gallery" id="gallery-icons"></div>
+
+  <button id="topBtn" onclick="scrollToTop()">Voltar ao Topo</button>
+
+  <footer class="footer-bar">
+    © 2025 Yaksha Wallpaper. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDBsoFDMsioHhBhnsb4t01n_iOMEHcM_fA",
+      authDomain: "yaksha-wallpapers.firebaseapp.com",
+      projectId: "yaksha-wallpapers",
+      storageBucket: "yaksha-wallpapers.appspot.com",
+      messagingSenderId: "349814742766",
+      appId: "1:349814742766:web:51e50e38d69c4d63599dff",
+      measurementId: "G-ZFDL529B5J"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    function signIn() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          db.collection("users").doc(user.uid).set({
+            displayName: user.displayName,
+            email: user.email,
+            photoUrl: user.photoURL,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+        })
+        .catch(error => console.error(error));
+    }
+
+    function signOut() {
+      auth.signOut();
+    }
+
+    auth.onAuthStateChanged(user => {
+      const userName = document.getElementById("userName");
+      const userAvatar = document.getElementById("userAvatar");
+      const loginBtn = document.getElementById("loginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      if (user) {
+        userName.textContent = user.displayName;
+        userAvatar.src = user.photoURL;
+        userAvatar.style.display = "block";
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+      } else {
+        userName.textContent = "";
+        userAvatar.style.display = "none";
+        loginBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+      }
+    });
+
+    const wallpapers = [
+      "imagem1.jpg", "imagem2.jpg", "imagem3.jpg", "imagem4.jpg", "imagem5.png", "imagem6.png",
+      "imagem7.png", "imagem8.png", "imagem9.png", "imagem10.jpg", "imagem11.jpg", "imagem12.png",
+      "imagem13.webp", "imagem14.png"
+    ];
+
+    const icons = [
+      "imagem15.jpg", "imagem16.jpg", "imagem17.jpg", "imagem18.jpg", "imagem19.jpg", "imagem20.jpg",
+      "imagem21.jpg", "imagem22.jpg", "imagem23.jpg", "imagem24.jpg", "imagem25.jpg"
+    ];
+
+    function renderGallery(images, containerId) {
+      const container = document.getElementById(containerId);
+      images.forEach(image => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <img src="${image}" alt="">
+          <div class="card-content">
+            <a class="download-btn" href="${image}" download>Baixar</a>
+            <button class="like-btn" onclick="likeImage('${image}')">Curtir ❤️</button>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function likeImage(imageId) {
+      const user = auth.currentUser;
+      if (!user) {
+        alert("Você precisa estar logado para curtir.");
+        return;
+      }
+      const likeRef = db.collection("likes").doc(imageId);
+
+      likeRef.get().then(doc => {
+        if (doc.exists && doc.data().users?.includes(user.uid)) {
+          alert("Você já curtiu esta imagem.");
+        } else {
+          likeRef.set({
+            users: firebase.firestore.FieldValue.arrayUnion(user.uid)
+          }, { merge: true });
+          alert("Imagem curtida com sucesso!");
+        }
+      });
+    }
+
+    renderGallery(wallpapers, "gallery-wallpaper");
+    renderGallery(icons, "gallery-icons");
+
+    window.onscroll = function () {
+      const btn = document.getElementById("topBtn");
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
 </body>
 </html>
